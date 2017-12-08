@@ -69,9 +69,11 @@ export default {
 
 function observableStorage() {
   const state = {}
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i)
-    state[key] = parseValue(localStorage.getItem(key))
+  if (global.localStorage) {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i)
+      state[key] = parseValue(localStorage.getItem(key))
+    }
   }
   return observable.map(state)
 }
